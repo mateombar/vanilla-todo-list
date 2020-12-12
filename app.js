@@ -5,6 +5,9 @@ const todoList = document.querySelector('.todo-list');
 const filterOption = document.querySelector('.filter-todo');
 
 // Event Listeners
+// Check if the DOM is loading, then do
+document.addEventListener('DOMContentLoaded', getTodos);
+
 todoButton.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteCheck);
 filterOption.addEventListener('click', filterTodo)
@@ -13,16 +16,26 @@ filterOption.addEventListener('click', filterTodo)
 function addTodo(event) {
     // Prevent form from submiting
     event.preventDefault();
+
+    createTodoElement(todoInput);
+
+    // Add new todo to localStorage
+    saveLocalTodos(event, todoInput.value);
+
+    // CLEAR TODOINPUT VALUE
+    todoInput.value = "";
+    // Clickear filterOption para que se actualice la lista
+    filterOption.click();
+}
+
+function createTodoElement(todoInput) {
     // Todo DIV
     const todoDiv = document.createElement('div');
     todoDiv.classList.add("todo");
     // create LI
     const newTodo = document.createElement('li');
-    newTodo.innerText = todoInput.value;
+    newTodo.innerText = todoInput;
     newTodo.classList.add('todo-item');
-    
-    // Add new todo to localStorage
-    saveLocalTodos(todoInput.value);
 
     // Append child
     todoDiv.appendChild(newTodo)
@@ -38,11 +51,6 @@ function addTodo(event) {
     todoDiv.appendChild(trashButton);
     // APPEND TO LIST
     todoList.appendChild(todoDiv);
-
-    // CLEAR TODOINPUT VALUE
-    todoInput.value = "";
-    // Clickear filterOption para que se actualice la lista
-    filterOption.click();
 }
 
 function deleteCheck(event) {
@@ -100,15 +108,27 @@ function filterTodo(e) {
     });
 }
 
-// LOCAL STORAGE
-function saveLocalTodos(todo){
-    // Check if i do already have thing in there
+// Check if i do already have thing in there
+function checkLocalStorage() {
     let todos;
-    if(localStorage.getItem('todos') === null){
+    if (localStorage.getItem('todos') === null) {
         todos = [];
-    }else{
+    } else {
         todos = JSON.parse(localStorage.getItem('todos'));
     }
+    return todos;
+}
+
+// LOCAL STORAGE
+function saveLocalTodos(todo) {
+    let todos = checkLocalStorage();
     todos.push(todo);
     localStorage.setItem("todos", JSON.stringify(todos))
+}
+
+function getTodos() {
+    let todos = checkLocalStorage();
+    todos.forEach(todo => {
+        createTodoElement(todo);
+    })
 }
