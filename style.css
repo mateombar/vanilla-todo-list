@@ -50,6 +50,7 @@ form button:hover {
 }
 .todo-list {
   list-style: none;
+  width: 400px;
   min-width: 30%;
 }
 
@@ -83,9 +84,12 @@ form button:hover {
   background: #ff4525;
 }
 
-.trash-btn:hover{
-    background: #ff2600;
-}   
+.trash-btn:hover {
+  background: #ff2600;
+}
 .complete-btn:hover {
-    background: #007965;
+  background: #007965;
+}
+.todo-item {
+  padding: 0rem 0.5rem;
 }
