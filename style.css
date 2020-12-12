@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: linear-gradient(90deg, #0065b3, #6a0094);
+  /* background: linear-gradient(13deg, rgba(2,0,36,1) 0%, rgba(33,9,121,1) 35%, rgba(0,212,255,1) 100%); */
+  color: white;
+  font-family: "IBM Plex Sans", sans-serif;
+  min-height: 100vh;
+}
+header {
+  font-size: 1.5rem;
+}
+
+header,
+form {
+  min-height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form input,
+form button {
+  padding: 0.5rem;
+  font-size: 2rem;
+  border: none;
+  background: white;
+  outline: none;
+}
+
+form button {
+  color: #0065b3;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover {
+  background: #0065b3;
+  color: white;
+}
