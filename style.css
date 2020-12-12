@@ -94,7 +94,14 @@ form button:hover {
   padding: 0rem 0.5rem;
 }
 
+.completed{
+    text-decoration: line-through;
+    opacity: 0.5;
+    transition: all 0.7s ease;
+}
 
-.fa-trash, .fa-check{
-    pointer-events: none;
+
+.fa-trash,
+.fa-check {
+  pointer-events: none;
 }

@@ -8,7 +8,7 @@ todoButton.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteCheck);
 
 // Functions
-function addTodo(event){
+function addTodo(event) {
     // Prevent form from submiting
     event.preventDefault();
     // Todo DIV
@@ -37,13 +37,20 @@ function addTodo(event){
     todoInput.value = "";
 }
 
-function deleteCheck(event){
+function deleteCheck(event) {
     const item = event.target;
 
     // DELETE TODO
-    if(item.classList[0] === 'trash-btn'){
+    if (item.classList[0] === 'trash-btn') {
         // GET THE PARENT ELEMENT
         const todo = item.parentElement;
         todo.remove();
+    }
+
+    // CHECK MARK 
+    if (item.classList[0] === 'complete-btn') {
+        // GET THE PARENT ELEMENT
+        const todo = item.parentElement;
+        todo.classList.toggle('completed')
     }
 }
