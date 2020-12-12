@@ -2,14 +2,15 @@
 const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-button');
 const todoList = document.querySelector('.todo-list');
+
 // Event Listeners
 todoButton.addEventListener('click', addTodo);
-// Functions
+todoList.addEventListener('click', deleteCheck);
 
+// Functions
 function addTodo(event){
     // Prevent form from submiting
     event.preventDefault();
-    console.log('gello');
     // Todo DIV
     const todoDiv = document.createElement('div');
     todoDiv.classList.add("todo");
@@ -34,4 +35,15 @@ function addTodo(event){
 
     // CLEAR TODOINPUT VALUE
     todoInput.value = "";
+}
+
+function deleteCheck(event){
+    const item = event.target;
+
+    // DELETE TODO
+    if(item.classList[0] === 'trash-btn'){
+        // GET THE PARENT ELEMENT
+        const todo = item.parentElement;
+        todo.remove();
+    }
 }
