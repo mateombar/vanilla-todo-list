@@ -7,6 +7,7 @@ const filterOption = document.querySelector('.filter-todo');
 // Event Listeners
 todoButton.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteCheck);
+filterOption.addEventListener('click', filterTodo)
 
 // Functions
 function addTodo(event) {
@@ -36,6 +37,8 @@ function addTodo(event) {
 
     // CLEAR TODOINPUT VALUE
     todoInput.value = "";
+    // Clickear filterOption para que se actualice la lista
+    filterOption.click();
 }
 
 function deleteCheck(event) {
@@ -58,9 +61,37 @@ function deleteCheck(event) {
         // GET THE PARENT ELEMENT
         const todo = item.parentElement;
         todo.classList.toggle('completed')
+        // Clickear filterOption para que se actualice la lista
+        filterOption.click();
     }
 }
 
-function filterTodo(e){
+function filterTodo(e) {
+    // Returns a nodelist with the children to todos
+    const todos = todoList.childNodes;
 
+    //the nodelist allow us to use a forach loop
+    todos.forEach(todo => {
+        // This is gonna bring us back the value attribute of the children option
+        switch (e.target.value) {
+            case 'all':
+                todo.style.display = 'flex';
+                break;
+            case 'completed':
+                // If the classlist contains completed class
+                if (todo.classList.contains('completed')) {
+                    todo.style.display = 'flex';
+                } else {
+                    todo.style.display = 'none';
+                }
+                break;
+            case 'uncompleted':
+                if (!todo.classList.contains('completed')) {
+                    todo.style.display = 'flex';
+                } else {
+                    todo.style.display = 'none';
+                }
+                break;
+        }
+    });
 }
