@@ -17,7 +17,7 @@ function addTodo(event) {
     // Prevent form from submiting
     event.preventDefault();
 
-    createTodoElement(todoInput);
+    createTodoElement(todoInput.value);
 
     // Add new todo to localStorage
     saveLocalTodos(event, todoInput.value);
@@ -120,7 +120,8 @@ function checkLocalStorage() {
 }
 
 // LOCAL STORAGE
-function saveLocalTodos(todo) {
+function saveLocalTodos(event, todo) {
+    event.preventDefault();
     let todos = checkLocalStorage();
     todos.push(todo);
     localStorage.setItem("todos", JSON.stringify(todos))
