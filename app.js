@@ -62,6 +62,9 @@ function deleteCheck(event) {
         const todo = item.parentElement;
         // Animation
         todo.classList.add('fall');
+        //Remove from Local Storage 
+        removeLocalTodos(todo);
+
         // WAIT and only run when above animation completes
         todo.addEventListener('transitionend', () => {
             todo.remove();
@@ -132,4 +135,11 @@ function getTodos() {
     todos.forEach(todo => {
         createTodoElement(todo);
     })
+}
+
+function removeLocalTodos(todo) {
+    let todos = checkLocalStorage();
+    const todoText = todo.children[0].innerText;
+    todos.splice(todos.indexOf(todoText), 1)
+    localStorage.setItem("todos", JSON.stringify(todos))
 }
